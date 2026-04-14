@@ -4,8 +4,11 @@ import solitaire.model.BoardType;
 import solitaire.model.SolitaireGame;
 import solitaire.model.Board;
 import solitaire.model.ManualGame;
+<<<<<<< HEAD
 import solitaire.model.GameRecorder;
 import solitaire.model.GameReplayer;
+=======
+>>>>>>> 0eb20ec49466548113d62f237a1e02b22fd764ac
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,10 +31,14 @@ public class SolitaireGUI extends JFrame {
 	private JRadioButton autoButton;
 	private JButton newGameButton;
 	private JButton randomizeButton;
+<<<<<<< HEAD
 	private JButton recordButton;
 	private JButton replayButton;
 	private javax.swing.Timer autoTimer;
 	private GameRecorder recorder;
+=======
+	private javax.swing.Timer autoTimer;
+>>>>>>> 0eb20ec49466548113d62f237a1e02b22fd764ac
 
 	public SolitaireGUI() {
 
@@ -62,8 +69,11 @@ public class SolitaireGUI extends JFrame {
 
 		newGameButton   = new JButton("New Game");
 		randomizeButton = new JButton("Randomize");
+<<<<<<< HEAD
 		recordButton    = new JButton("Record");
 		replayButton    = new JButton("Replay");
+=======
+>>>>>>> 0eb20ec49466548113d62f237a1e02b22fd764ac
 
 		sizeField = new JTextField("7", 3);
 
@@ -93,16 +103,22 @@ public class SolitaireGUI extends JFrame {
 		controlPanel.add(manualButton);
 		controlPanel.add(autoButton);
 		controlPanel.add(randomizeButton);
+<<<<<<< HEAD
 		controlPanel.add(recordButton);
 		controlPanel.add(replayButton);
+=======
+>>>>>>> 0eb20ec49466548113d62f237a1e02b22fd764ac
 		controlPanel.add(newGameButton);
 
 		add(controlPanel, BorderLayout.SOUTH);
 
 		newGameButton.addActionListener(e -> handleNewGame());
 		randomizeButton.addActionListener(e -> handleRandomize());
+<<<<<<< HEAD
 		recordButton.addActionListener(e -> handleRecord());
 		replayButton.addActionListener(e -> handleReplay());
+=======
+>>>>>>> 0eb20ec49466548113d62f237a1e02b22fd764ac
 	}
 
 	// Build the grid of the board
@@ -173,6 +189,7 @@ public class SolitaireGUI extends JFrame {
 				selectedRow = -1;
 				selectedCol = -1;
 			} else {
+<<<<<<< HEAD
 				// save from values before resetting selectedRow/selectedCol
 				int fromRow = selectedRow;
 				int fromCol = selectedCol;
@@ -180,11 +197,17 @@ public class SolitaireGUI extends JFrame {
 				// try to make the move
 				boolean success = game.makeMove(fromRow, fromCol, row, col);
 				buttons[fromRow][fromCol].setBackground(null); // remove highlight
+=======
+				// try to make the move
+				boolean success = game.makeMove(selectedRow, selectedCol, row, col);
+				buttons[selectedRow][selectedCol].setBackground(null); // remove highlight
+>>>>>>> 0eb20ec49466548113d62f237a1e02b22fd764ac
 				selectedRow = -1;
 				selectedCol = -1;
 
 				if (success) {
 					randomizeButton.setEnabled(false); // disable randomize after first move
+<<<<<<< HEAD
 
 					// record the move if recording is active
 					if (recorder != null && recorder.isRecording()) {
@@ -198,6 +221,11 @@ public class SolitaireGUI extends JFrame {
 						if (recorder != null && recorder.isRecording()) {
 							handleSaveRecording();
 						}
+=======
+					refreshBoard();
+					// check if game is over
+					if (game.isGameOver()) {
+>>>>>>> 0eb20ec49466548113d62f237a1e02b22fd764ac
 						JOptionPane.showMessageDialog(this,
 							"Game Over! Pegs remaining: " + game.countPegs());
 					}
@@ -214,6 +242,7 @@ public class SolitaireGUI extends JFrame {
 		}
 	}
 
+<<<<<<< HEAD
 	// start or stop recording
 	private void handleRecord() {
 		if (recorder == null || !recorder.isRecording()) {
@@ -309,6 +338,8 @@ public class SolitaireGUI extends JFrame {
 		}
 	}
 
+=======
+>>>>>>> 0eb20ec49466548113d62f237a1e02b22fd764ac
 	// timer fires every 600ms, plays one random valid move each tick
 	private void startAutoplay() {
 		autoTimer = new javax.swing.Timer(600, e -> {
@@ -330,10 +361,13 @@ public class SolitaireGUI extends JFrame {
 			autoTimer.stop();
 		}
 
+<<<<<<< HEAD
 		// reset recorder
 		recorder = null;
 		recordButton.setText("Record");
 
+=======
+>>>>>>> 0eb20ec49466548113d62f237a1e02b22fd764ac
 		// save mode BEFORE rebuilding controls
 		boolean automated = autoButton.isSelected();
 
@@ -367,11 +401,17 @@ public class SolitaireGUI extends JFrame {
 		// use the saved value, not autoButton.isSelected()
 		if (automated) {
 			randomizeButton.setEnabled(false);
+<<<<<<< HEAD
 			recordButton.setEnabled(false); // disable record in autoplay
 			startAutoplay();
 		} else {
 			randomizeButton.setEnabled(true);
 			recordButton.setEnabled(true); // enable record in manual mode
+=======
+			startAutoplay();
+		} else {
+			randomizeButton.setEnabled(true); // re-enable randomize for new manual game
+>>>>>>> 0eb20ec49466548113d62f237a1e02b22fd764ac
 		}
 	}
 }
